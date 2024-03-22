@@ -19,6 +19,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="card-body table-responsive p-0">
+                <a href="{{route('time.user.create')}}" class="btn btn-outline-primary">Создать</a>
                     <table class="table table-hover text-nowrap">
                         <thead>
                         <tr>
@@ -31,7 +32,7 @@
                         <tbody>
                         @foreach($timeUsers as $timeUser)
                             <tr>
-                                <td><a href="{{route('time-user.show',$timeUser)}}">{{$timeUser->id}}</a></td>
+                                <td><a href="{{route('time.user.show',$timeUser)}}">{{$timeUser->id}}</a></td>
                                 <td><a href="{{route('user.show',$timeUser)}}">{{$timeUser->UserEmail}}</a></td>
                                 <td><a href="{{route('time.show',$timeUser)}}">{{$timeUser->TimeStart}}</a></td>
                                 <td><a href="{{route('time.show',$timeUser)}}">{{$timeUser->TimeEnd}}</a></td>

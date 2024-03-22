@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('time-user.index')}}" class="nav-link">
+                        <a href="{{route('time.user.index')}}" class="nav-link">
                             <i class="fa-regular fa-clock"></i>
                             <p>
                                 Time users

@@ -35,9 +35,13 @@ Route::group(['prefix' => 'admin'],function () {
     });
 
     Route::group(['prefix' => 'time-users'],function () {
-        Route::get('/', [TimeUserController::class, 'index'])->name('time-user.index');
-        Route::get('/{userTime}', [TimeUserController::class, 'show'])->name('time-user.show');
-        Route::delete('/{userTime}', [TimeUserController::class, 'delete'])->name('time-user.destroy');
+        Route::get('/', [TimeUserController::class, 'index'])->name('time.user.index');
+        Route::get('/create', [TimeUserController::class, 'create'])->name('time.user.create');
+        Route::post('/', [TimeUserController::class, 'store'])->name('time.user.store');
+        Route::get('/{userTime}', [TimeUserController::class, 'show'])->name('time.user.show');
+        Route::get('/{userTime}/edit', [TimeUserController::class, 'edit'])->name('time.user.edit');
+        Route::patch('/{userTime}', [TimeUserController::class, 'update'])->name('time.user.update');
+        Route::delete('/{userTime}', [TimeUserController::class, 'delete'])->name('time.user.destroy');
     });
 
     Route::group(['prefix' => 'time'],function () {

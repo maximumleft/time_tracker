@@ -37,10 +37,10 @@
                     </table>
                     <div class="d-flex p-3">
                         <div class="mr-3">
-                            <a href="{{route('time-user.index')}}" class="btn btn-secondary">Назад</a>
+                            <a href="{{route('time.user.index')}}" class="btn btn-secondary">Назад</a>
                         </div>
 
-                        <form action="{{route('time-user.destroy',$userTime)}}" method="post">
+                        <form action="{{route('time.user.destroy',$userTime)}}" method="post">
                             @csrf
                             @method('delete')
                             <input type="submit" class="btn btn-outline-danger" value="Удалить">
