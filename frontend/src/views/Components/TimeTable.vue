@@ -1,78 +1,53 @@
 <template>
-  <a-table
-      :columns="columns"
-      :row-key="record => record.login.uuid"
-      :data-source="dataSource"
-      :pagination="pagination"
-      :loading="loading"
-      @change="handleTableChange"
-  >
+  <a-table :columns="columns" :data-source="data" bordered>
     <template #bodyCell="{ column, text }">
-      <template v-if="column.dataIndex === 'name'">{{ text.first }} {{ text.last }}</template>
+      <template v-if="column.dataIndex === 'name'">
+        <a>{{ text }}</a>
+      </template>
     </template>
   </a-table>
 </template>
 <script setup>
-import { computed } from 'vue';
-import { usePagination } from 'vue-request';
-import axios from 'axios';
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    sorter: true,
-    width: '20%',
   },
   {
-    title: 'Gender',
-    dataIndex: 'gender',
-    filters: [
-      {
-        text: 'Male',
-        value: 'male',
-      },
-      {
-        text: 'Female',
-        value: 'female',
-      },
-    ],
-    width: '20%',
+    title: 'Cash Assets',
+    className: 'column-money',
+    dataIndex: 'money',
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
+    title: 'Address',
+    dataIndex: 'address',
   },
 ];
-const queryData = params => {
-  return axios.get('https://randomuser.me/api?noinfo', {
-    params,
-  });
-};
-const {
-  data: dataSource,
-  run,
-  loading,
-  current,
-  pageSize,
-} = usePagination(queryData, {
-  formatResult: res => res.data.results,
-  pagination: {
-    currentKey: 'page',
-    pageSizeKey: 'results',
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+    money: '￥300,000.00',
+    address: 'New York No. 1 Lake Park',
   },
-});
-const pagination = computed(() => ({
-  total: 200,
-  current: current.value,
-  pageSize: pageSize.value,
-}));
-const handleTableChange = (pag, filters, sorter) => {
-  run({
-    results: pag.pageSize,
-    page: pag?.current,
-    sortField: sorter.field,
-    sortOrder: sorter.order,
-    ...filters,
-  });
-};
+  {
+    key: '2',
+    name: 'Jim Green',
+    money: '￥1,256,000.00',
+    address: 'London No. 1 Lake Park',
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    money: '￥120,000.00',
+    address: 'Sidney No. 1 Lake Park',
+  },
+
+];
 </script>
+<style scoped>
+th.column-money,
+td.column-money {
+  text-align: right !important;
+}
+</style>
