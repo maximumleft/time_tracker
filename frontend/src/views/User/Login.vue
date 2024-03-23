@@ -55,4 +55,8 @@ const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo);
 };
 </script>
-
+<style scoped lang="css">
+body{
+  width: 50%;
+}
+</style>

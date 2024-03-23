@@ -1,82 +1,83 @@
 <template>
   <a-layout style="min-height: 100vh">
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
-      <div class="logo" />
+      <div class="logo"/>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
-          <pie-chart-outlined />
-          <span>Option 1</span>
+          <ClockCircleOutlined/>
+          <span>Button</span>
         </a-menu-item>
         <a-menu-item key="2">
-          <desktop-outlined />
-          <span>Option 2</span>
-        </a-menu-item>
-        <a-sub-menu key="sub1">
-          <template #title>
-            <span>
-              <user-outlined />
-              <span>User</span>
-            </span>
-          </template>
-          <a-menu-item key="3">Tom</a-menu-item>
-          <a-menu-item key="4">Bill</a-menu-item>
-          <a-menu-item key="5">Alex</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <template #title>
-            <span>
-              <team-outlined />
-              <span>Team</span>
-            </span>
-          </template>
-          <a-menu-item key="6">Team 1</a-menu-item>
-          <a-menu-item key="8">Team 2</a-menu-item>
-        </a-sub-menu>
-        <a-menu-item key="9">
-          <file-outlined />
-          <span>File</span>
+          <SettingOutlined/>
+          <span>Settings</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0" />
-      <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>User</a-breadcrumb-item>
-          <a-breadcrumb-item>Bill</a-breadcrumb-item>
-        </a-breadcrumb>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px',color:black, }">
-          111111111111111111111111111111111111111111111111
+      <a-layout-content style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; position: relative;
+background-image: url('src/assets/images/1660127783_12-kartinkin-net-p-oboi-kotiki-multyashnie-krasivo-12.jpg');
+background-size: cover;">
+        <div style="display: flex; flex-direction: row; justify-content: end; align-items: start; height: 10vh;">
+          <div style="color: #49c5b6">
+            <b id="currentTime"></b>
+          </div>
+          <div style="color: #49c5b6; margin-left: 10%">
+            <b id="currentDay"></b>
+          </div>
         </div>
+        <a-button type="primary" style="width: 200px; height: 50px; font-size: 20px;
+  background-color: #49c5b6 ;color: black; margin-left: auto;
+  margin-right: auto;">Начать/Закончить
+        </a-button>
+        <div>
+          <time-table></time-table>
+        </div>
+        <div
+            style="display: flex; justify-content: flex-end; align-items: flex-end; color:white; font-size: 7pt; margin-top: auto; margin-bottom: 1%">
+          <span>Created by Maks</span>
+        </div>
+
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
 <script lang="ts" setup>
-import {
-  PieChartOutlined,
-  DesktopOutlined,
-  UserOutlined,
-  TeamOutlined,
-  FileOutlined,
-} from '@ant-design/icons-vue';
-import { ref } from 'vue';
+import {ClockCircleOutlined, SettingOutlined} from '@ant-design/icons-vue';
+import {ref} from 'vue';
+import Table from "@/views/Components/Table.vue";
+import TimeTable from "@/views/Components/TimeTable.vue";
+
 const collapsed = ref<boolean>(false);
 const selectedKeys = ref<string[]>(['1']);
+
+function updateDateTime() {
+  const currentTimeElement = document.getElementById('currentTime');
+  const currentDayElement = document.getElementById('currentDay');
+
+  if (currentTimeElement && currentDayElement) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const now = new Date();
+
+    currentTimeElement.textContent = now.toLocaleTimeString();
+    currentDayElement.textContent = days[now.getDay()];
+  }
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
 </script>
+
 <style scoped>
 #components-layout-demo-side .logo {
   height: 32px;
   margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0);
 }
 
 .site-layout .site-layout-background {
   background: #fff;
 }
+
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
 }
