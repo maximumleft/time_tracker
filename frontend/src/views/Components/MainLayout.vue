@@ -1,15 +1,15 @@
 <template>
   <a-layout style="min-height: 100vh">
-    <a-layout-sider v-model:collapsed="collapsed" collapsible>
-      <div class="logo"/>
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+      <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
           <ClockCircleOutlined/>
-          <router-link :to="{name: 'button'}"><span>Button</span></router-link>
+          <router-link :to="{name: 'button'}">Button</router-link>
         </a-menu-item>
         <a-menu-item key="2">
           <SettingOutlined/>
-          <router-link :to="{name: 'settings'}"><span>Settings</span></router-link>
+          <router-link :to="{name: 'settings'}">Settings</router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
