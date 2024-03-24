@@ -15,7 +15,18 @@
     </a-layout-sider>
     <a-layout style="background-image: url('src/assets/images/1660127783_12-kartinkin-net-p-oboi-kotiki-multyashnie-krasivo-12.jpg');
 background-size: cover;">
-      <slot></slot>
+      <div style="display: flex; flex-direction: row; justify-content: center;
+  align-items: start; height: 10vh; position: relative;">
+      <div style="display: flex; flex-direction: row; justify-content: end; align-items: start; height: 10vh;">
+        <div style="color: #49c5b6">
+          <b id="currentTime"></b>
+        </div>
+        <div style="color: #49c5b6; margin-left: 10%">
+          <b id="currentDay"></b>
+        </div>
+      </div>
+      </div>
+      <router-view></router-view>
     </a-layout>
   </a-layout>
 </template>
