@@ -1,5 +1,5 @@
 <template>
-  <div style=" width: 30%; height: 15%; margin-left: 30%; margin-top: 10%">
+  <div style=" width: 30%; height: 15%; margin-left: 30%; margin-top: 10%;">
 
 
   <a-form
