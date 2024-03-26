@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('user.index', compact('users'));
+        return UserResource::collection(User::all());
     }
 
     public function show(User $user)

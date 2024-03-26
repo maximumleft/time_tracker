@@ -52,7 +52,7 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import {computed, reactive} from 'vue';
+import {computed, reactive,onMounted} from 'vue';
 import axios from 'axios'
 interface FormState {
   email: string;
@@ -87,6 +87,10 @@ async function sendDataToServer(formState: FormState): Promise<void> {
     console.error('Error sending data:', error);
   }
 }
+onMounted(() => {
+  console.log('Component has been mounted');
+  console.log(localStorage.getItem('access_token'));
+});
 </script>
 <style scoped lang="css">
 body{

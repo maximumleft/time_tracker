@@ -4,12 +4,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/login',
-      name:'login',
+      path: '/',
+      name:'login.layout',
       component: () => import('../views/Components/LoginLayout.vue'),
       children: [
         {
-          path: '/',
+          path: '/login',
+          name:'login',
           component: () => import('../views/User/Login.vue'),
         },
         {

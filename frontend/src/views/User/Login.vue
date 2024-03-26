@@ -33,7 +33,7 @@
     </a-form-item>
 
     <a-form-item style="margin-left: 25vh">
-      <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+      <a-button @click.prevent="login(formState)" :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
         Log in
       </a-button>
       Or
@@ -43,8 +43,11 @@
 </template>
 <script setup>
 import {UserOutlined, LockOutlined} from '@ant-design/icons-vue';
-
 import { reactive, computed } from 'vue';
+import axios from "axios";
+import {useRouter} from "vue-router";
+
+const router = useRouter()
 const formState = reactive({
   email: '',
   password: '',
@@ -59,6 +62,16 @@ const onFinishFailed = errorInfo => {
 const disabled = computed(() => {
   return !(formState.email && formState.password);
 });
+async function login(formState){
+  try {
+    const response = await axios.post('http://127.0.0.1:8000/api/auth/login', formState);
+    localStorage.setItem('access_token',response.data.access_token)
+    await router.push({name:'settings'})
+  } catch (error) {
+    console.error('Error sending data:', error);
+  }
+}
+
 </script>
 <style scoped>
 #components-form-demo-normal-login .login-form {
