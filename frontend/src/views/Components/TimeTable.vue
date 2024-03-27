@@ -1,24 +1,13 @@
 <template>
-  <table class="table table-hover text-nowrap">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="user in formState.data">
-      <td>{{user.id}}</td>
-      <td>{{user.name}}</td>
-      <td>{{user.email}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <a-table
+      :columns="columns"
+      :data-source="formState.data"
+  >
+  </a-table>
 </template>
 <script setup>
 import api from "../../api.js"
-import {onMounted, reactive} from 'vue';
+import { onMounted, reactive} from 'vue';
 import {useRouter} from "vue-router";
 const router = useRouter()
 const formState = reactive({
@@ -33,9 +22,7 @@ const columns = [
     title: 'Email',
     dataIndex: 'email',
   },
-
 ];
-let data = [];
 
 onMounted(() => {
   getUsers();
@@ -53,9 +40,3 @@ async function getUsers(){
   }
 }
 </script>
-<style scoped>
-th.column-money,
-td.column-money {
-  text-align: right !important;
-}
-</style>

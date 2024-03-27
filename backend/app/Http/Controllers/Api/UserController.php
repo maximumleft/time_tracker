@@ -45,7 +45,7 @@ class UserController extends Controller
         $data = $request->validated();
         $user->update($data);
 
-        return view('user.show', compact('user'));
+        return response()->json(['status' => 'ok']);
     }
 
     public function delete(User $user)

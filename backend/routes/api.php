@@ -30,6 +30,7 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 
     Route::group(['middleware' =>'auth:api'],function (){
         Route::get('/users', [UserController::class, 'index']);
+        Route::patch('/user/{user}', [UserController::class, 'update']);
 
     });
 });
