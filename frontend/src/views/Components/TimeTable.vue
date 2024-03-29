@@ -33,10 +33,24 @@ async function getUsers(){
     console.log('ok');
     formState.data = response.data.data
   } catch (error) {
-    console.error('Error get Users:', error.response.status);
-    if(error.response.status === 401){
+    console.error('Error get Users:', error.response.data.message);
+    if(error.response.data.message === 'Token has expired')
+    {
+      await refresh()
+    }else if(error.response.status === 401){
       await router.push({name:'login'})
     }
   }
 }
+async function refresh(){
+  const token = localStorage.getItem('access_token')
+  try {
+    const response = await api.post('http://127.0.0.1:8000/api/auth/refresh',token);
+    console.log('refresh ok');
+    localStorage.setItem('access_token',response.data.access_token)
+  } catch (error) {
+    console.error('Error refresh', error.response);
+  }
+}
+
 </script>

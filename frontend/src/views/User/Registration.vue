@@ -54,6 +54,8 @@
 <script lang="ts" setup>
 import {computed, reactive,onMounted} from 'vue';
 import axios from 'axios'
+import {useRouter} from "vue-router";
+const router = useRouter()
 interface FormState {
   email: string;
   name: string;
@@ -83,13 +85,13 @@ async function sendDataToServer(formState: FormState): Promise<void> {
   try {
     const response = await axios.post('http://127.0.0.1:8000/api/users', formState);
     console.log('Data sent successfully:', response.data);
+    await router.push({name:'button'})
   } catch (error) {
     console.error('Error sending data:', error);
   }
 }
 onMounted(() => {
-  console.log('Component has been mounted');
-  console.log(localStorage.getItem('access_token'));
+
 });
 </script>
 <style scoped lang="css">

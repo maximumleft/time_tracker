@@ -28,7 +28,7 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('refresh',  [AuthController::class,'refresh']);
     Route::post('me',  [AuthController::class,'me']);
 
-    Route::group(['middleware' =>'auth:api'],function (){
+    Route::group(['middleware' =>'jwt.auth'],function (){
         Route::get('/users', [UserController::class, 'index']);
         Route::patch('/user/{user}', [UserController::class, 'update']);
 
