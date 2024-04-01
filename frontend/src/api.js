@@ -34,8 +34,8 @@ api.interceptors.response.use(config => {
                 }).then(res => {
                     localStorage.setItem('access_token', res.data.access_token)
                     error.config.headers.authorization = `Bearer ${token}`
-                    return api.request(error.config)
                 });
+                    //return api.request(error.config)
             } catch (error) {
                 console.error('Error refresh', error.response);
             }

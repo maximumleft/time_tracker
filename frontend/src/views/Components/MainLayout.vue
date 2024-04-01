@@ -4,12 +4,12 @@
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
-          <ClockCircleOutlined/>
-          <router-link :to="{name: 'button'}">Button</router-link>
-        </a-menu-item>
-        <a-menu-item key="2">
           <SettingOutlined/>
           <router-link :to="{name: 'settings'}">Settings</router-link>
+        </a-menu-item>
+        <a-menu-item key="2">
+          <ClockCircleOutlined/>
+          <router-link :to="{name: 'button'}">Button</router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
