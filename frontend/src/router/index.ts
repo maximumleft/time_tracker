@@ -38,7 +38,7 @@ const router = createRouter({
         },
         {
             path: '/:pathMatch(.*)*',
-            name:'404',
+            name: '404',
             component: () => import('../views/Pages/PageNotFound.vue')
         }
     ]
@@ -46,15 +46,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('access_token')
 
-    if(to.name !== 'login')
-    {
-        if(!token){
+    if (!token) {
+        if (to.name === 'login' || to.name === 'login.registration') {
+            return next()
+        } else {
             return next({
                 name: 'login'
             })
         }
     }
-    if(to.name === 'login' && token){
+    if (to.name === 'login' || to.name === 'login.registration' && token) {
         return next({
             name: 'button'
         })

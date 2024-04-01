@@ -28,11 +28,14 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         $data = $request->validated();
-        User::firstOrCreate([
-            'email' => $data['email'],
-        ],$data);
+        $user = User::query()->where('email', $data['email'])->first();
 
-        return $data;
+        if ($user) return response(['message' => 'User with this email already exists']);
+
+        $user = User::create($data);
+        $token = auth()->tokenById($user->id);
+
+        return response(['access_token' => $token]);
     }
 
     public function edit(User $user)
@@ -40,7 +43,7 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    public function update(User $user,UserUpdateRequest $request)
+    public function update(User $user, UserUpdateRequest $request)
     {
         $data = $request->validated();
         $user->update($data);

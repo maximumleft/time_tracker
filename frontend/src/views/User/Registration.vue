@@ -84,8 +84,8 @@ const disabled = computed(() => {
 async function sendDataToServer(formState: FormState): Promise<void> {
   try {
     const response = await axios.post('http://127.0.0.1:8000/api/users', formState);
-    console.log('Data sent successfully:', response.data);
-    await router.push({name:'button'})
+    localStorage.setItem('access_token',response.data.access_token)
+    await router.push({name:'settings'})
   } catch (error) {
     console.error('Error sending data:', error);
   }
