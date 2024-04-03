@@ -33,7 +33,7 @@
         </a-button>
       </a-form-item>
 
-      <a @click.prevent="logout" class="btn btn-danger">
+      <a href="#" @click.prevent="logout">
         Log Out
       </a>
     </a-form>
@@ -44,6 +44,7 @@
 import {onMounted, ref} from 'vue';
 import api from "../../api.js"
 import {useRouter} from "vue-router";
+
 
 const router = useRouter()
 const formState = ref({
@@ -73,12 +74,14 @@ async function updateData() {
 
 async function logout() {
   try {
-    const response = await api.post('http://127.0.0.1:8000/api/auth/logout');
-    console.log(response.data);
-    localStorage.removeItem('access_token')
-    await router.push({name: 'settings'})
+    await api.post('http://127.0.0.1:8000/api/auth/logout')
+        .then((res: any) => {
+          localStorage.removeItem('access_token')
+          console.log(111);
+          router.push({name:'login'})
+        });
   } catch (error) {
-    console.error('Error logout User')
+    console.error('Error logout User', error)
   }
 }
 
